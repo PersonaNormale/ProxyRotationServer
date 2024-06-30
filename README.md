@@ -1,6 +1,6 @@
-# ProxyCarousel
+# ProxyRotationServer
 
-Welcome to **ProxyCarousel** – a powerful, multi-threaded proxy server for rotating proxies, written in Python. This server is designed to handle HTTP requests, forward them through a proxy to a target server, and return the response to the client, all while offering robust features and easy setup. 
+Welcome to **ProxyRotationServer** – a powerful, multi-threaded proxy server for rotating proxies, written in Python. This server is designed to handle HTTP requests, forward them through a proxy to a target server, and return the response to the client, all while offering robust features and easy setup. 
 
 ## ✨ Features
 
@@ -21,8 +21,8 @@ Welcome to **ProxyCarousel** – a powerful, multi-threaded proxy server for rot
 1. **Clone the repository**:
 
     ```sh
-    git clone https://github.com/PersonaNormale/ProxyCarousel.git
-    cd ProxyCarousel
+    git clone https://github.com/PersonaNormale/ProxyRotationServer.git
+    cd ProxyRotationServer
     ```
 
 2. **Install the required dependencies**:
