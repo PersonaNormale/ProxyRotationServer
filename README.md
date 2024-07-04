@@ -37,7 +37,7 @@ Welcome to **ProxyRotationServer** – a powerful, multi-threaded proxy server f
 
 Usage:
 
-```sh
+```
 usage: proxy_server.py [-h] --host HOST --port PORT --proxy-file PROXY_FILE
                        [--log LOG]
                        [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
