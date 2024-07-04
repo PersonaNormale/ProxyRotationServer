@@ -1,6 +1,7 @@
 import socket
 import threading
 import select
+import selectors
 import re
 from base64 import b64encode
 from logger_config import logger
@@ -94,12 +95,15 @@ class ConnectionHandler(threading.Thread):
         return connect_str + "\r\n"
 
     def handle_data_exchange(self):
-        sockets = [self.client_conn, self.server_conn]
+        selector = selectors.DefaultSelector()
+        selector.register(self.client_conn, selectors.EVENT_READ)
+        selector.register(self.server_conn, selectors.EVENT_READ)
+
         while True:
-            readable, _, exceptional = select.select(sockets, [], sockets, 1)
-            if exceptional:
-                break
-            for sock in readable:
+            events = selector.select(timeout=None)
+
+            for key, _ in events:
+                sock = key.fileobj
                 try:
                     data = sock.recv(MAX_CHUNK_SIZE)
                     if not data:
