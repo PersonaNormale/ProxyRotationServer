@@ -1,6 +1,5 @@
 import socket
 import threading
-import select
 import selectors
 import re
 from base64 import b64encode
