@@ -22,6 +22,12 @@ class Server:
         signal.signal(signal.SIGTERM, self.signal_handler)
         signal.signal(signal.SIGINT, self.signal_handler)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.stop()
+
     def signal_handler(self, signum, frame):
         logger.info(f"Received signal {signum}. Shutting down...")
         self.stop()
