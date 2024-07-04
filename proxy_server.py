@@ -2,6 +2,7 @@ import sys
 import socket
 from concurrent.futures import ThreadPoolExecutor
 import argparse
+import signal
 
 from constants import MAX_THREADS, BACKLOG
 from logger_config import logger
@@ -18,6 +19,12 @@ class Server:
         self.proxy_pool = proxy_pool
         self.server_socket = self.create_server_socket()
         self.executor = ThreadPoolExecutor(max_workers=MAX_THREADS)
+        signal.signal(signal.SIGTERM, self.signal_handler)
+        signal.signal(signal.SIGINT, self.signal_handler)
+
+    def signal_handler(self, signum, frame):
+        logger.info(f"Received signal {signum}. Shutting down...")
+        self.stop()
 
     def create_server_socket(self):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
