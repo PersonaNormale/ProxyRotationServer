@@ -7,8 +7,14 @@ def load_proxies(filepath):
     try:
         with open(filepath, 'r') as file:
             return [line.strip() for line in file if line.strip()]
+    except FileNotFoundError:
+        logger.error(f"Proxy list file not found: {filepath}")
+        return []
+    except PermissionError:
+        logger.error(f"PermissionDenied when trying to read {filepath}")
     except IOError as e:
-        logger.error(f"Failed to read proxy list from {filepath}: {e}")
+        logger.error(
+            f"IO error while trying to read proxy list from {filepath}: {e}")
         return []
 
 
@@ -18,6 +24,12 @@ def test_proxy(proxy):
         response = requests.get("https://www.google.com", proxies={
                                 "http": f"http://{proxy}", "https": f"http://{proxy}"}, timeout=5)
         return response.status_code == 200
+    except requests.ConnectTimeout:
+        logger.error(f"Proxy {proxy} timed out")
+        return False
+    except requests.ConnectionError:
+        logger.error(f"Connection error with proxy {proxy}")
+        return False
     except requests.RequestException as e:
         logger.error(f"Proxy {proxy} failed: {e}")
         return False
