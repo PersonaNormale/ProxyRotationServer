@@ -71,9 +71,9 @@ def main():
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Proxy Server")
-    parser.add_argument("--host", type=str, required=True,
+    parser.add_argument("--host", type=str, default="localhost",
                         help="Host for the proxy server")
-    parser.add_argument("--port", type=int, required=True,
+    parser.add_argument("--port", type=int, default="8080",
                         help="Port for the proxy server")
     parser.add_argument("--proxy-file", type=str, required=True,
                         help="File containing list of proxies")

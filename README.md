@@ -38,8 +38,8 @@ Welcome to **ProxyRotationServer** – a powerful, multi-threaded proxy server f
 Usage:
 
 ```
-usage: proxy_server.py [-h] --host HOST --port PORT --proxy-file PROXY_FILE
-                       [--log LOG]
+usage: proxy_server.py [-h] [--host HOST] [--port PORT] --proxy-file
+                       PROXY_FILE [--log LOG]
                        [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 Proxy Server
@@ -62,12 +62,10 @@ You can configure the server by modifying the following constants in proxy_serve
 - MAX_THREADS: The maximum number of threads in the thread pool (default: 200).
 - BLACKLISTED: List of blacklisted hosts that the server will block.
 - MAX_CHUNK_SIZE: The maximum chunk size for data exchange (default: 16 * 1024).
-- PROXY_LIST_FILE: The file containing the list of proxies (default: proxies.txt).
 
 ## Details
-- Proxies are loaded from proxies.txt.
 - Proxies are tested (Not Working || Black Listed) for reliability using a request to https://www.google.com.
 - Only usable proxies are used for forwarding requests.
 - Running the Server
 - Start the server by running proxy_server.py.
-- The server listens on localhost:8000 by default and handles incoming connections using a thread pool for multi-threading support.
+- The server listens on localhost:8080 by default and handles incoming connections using a thread pool for multi-threading support.
