@@ -1,5 +1,7 @@
-class ResponseParsingError():
+class ResponseParsingError(Exception):
     """Raised when there's an error parsing a response."""
+
+    pass
 
 
 class Response:
