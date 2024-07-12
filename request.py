@@ -1,10 +1,13 @@
 import re
 from constants import DEFAULT_HTTP_PORT, DEFAULT_HTTPS_PORT, Protocol
+
 # Request and Response classes
 
 
-class RequestParsingError():
+class RequestParsingError(Exception):
     """Raised when there's an error parsing a request."""
+
+    pass
 
 
 class Request:
@@ -40,12 +43,11 @@ class Request:
                 self.headers[key.strip().lower()] = value.strip()
 
     def parse_host_port(self):
-        host_header = self.headers.get('host', '')
+        host_header = self.headers.get("host", "")
         match = re.match(r"^(.*?)(?::(\d+))?$", host_header)
         if match:
             self.host = match.group(1)
-            self.port = int(match.group(2)) if match.group(
-                2) else DEFAULT_HTTP_PORT
+            self.port = int(match.group(2)) if match.group(2) else DEFAULT_HTTP_PORT
         else:
             raise ValueError(f"Invalid host header: {host_header}")
 
